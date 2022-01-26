@@ -19,11 +19,6 @@ namespace Program360
             {
                 scores[i] = new int[] { 0, 0, 0, 0, 0, 0, 0 };
             }
-            //scores[0] = new int[] { 0, 0, 0, 0, 0, 0, 0};
-            //scores[1] = new int[] { 0, 0, 0, 0, 0, 0, 0 };
-            //scores[2] = new int[] { 0, 0, 0, 0, 0, 0, 0 };
-            //scores[3] = new int[] { 0, 0, 0, 0, 0, 0, 0 };
-            ////scores[4] = new int[] { 0, 0, 0, 0, 0, 0 };
 
 
 
@@ -39,14 +34,8 @@ namespace Program360
                 }
             }
 
-            //for (int i = 0;i < teams.Length; i++)
-            //{
-            //    System.Console.WriteLine(teams[i]);
-            //    for (int j = 0; j < 7; j++)
-            //    {
-            //        System.Console.WriteLine(scores[i][j]);
-            //    }
-            //}
+
+
             string[] finalAwnswer = new string[teams.Length + 1];
             finalAwnswer[0] = matchName;
 
@@ -231,43 +220,20 @@ namespace Program360
             }
 
 
-
-            //tempScores[0] = scores[0];
-            //tempName[0] = teams[0];
-
-
-
+            int lastScore = 0;
             for (int i = 0; i < teams.Length; i++)
             {
                 int index = 0;
                 int score = 0;
-                int wins = 0;
-                int goalDif = 0;
+
                 for (int j = 0; j < teams.Length; j++)
                 {
-                    // goal diff
-                    if ((scores[j][4] - scores[j][5]) > goalDif && !tempName.Contains(teams[j]) && tempName[j] == null)
-                    {
-                        goalDif = (scores[j][4] - scores[j][5]);
-                        index = j;
-
-                    }
-
-                        // sort by wins
-                        if (scores[j][1] > wins && !tempName.Contains(teams[j]) && tempName[j] == null)
-                    {
-                        wins = scores[j][1];
-                        index = j;
-
-                    }
-
                     // sort by points
-                    if (scores[j][6] > score && !tempName.Contains(teams[j]) && tempName[j] == null)
+                    if (scores[j][6] >= score && !tempName.Contains(teams[j]))
                     {
+                        lastScore = scores[j][6];
                         score = scores[j][6];
-                        index = j;
-
-
+                        index = j;                                                                   
                     }
                 }
 
@@ -289,41 +255,17 @@ namespace Program360
                     tempName[i], tempScores[i][6], tempScores[i][0], tempScores[i][1], tempScores[i][2], tempScores[i][3],
                     tempScores[i][4] - tempScores[i][5], tempScores[i][4],tempScores[i][5], i+1);
                 tempGame[i] = tempString;
-                //System.Console.WriteLine(tempString);
             }
-
-
-
-
-
-
-
-
-            //System.Console.WriteLine("\n\n\n\nUNFORMATED-------\n");
-            //tempScores = scores;
-            //tempName = teams;
-
-            //for (int i = 0; i < teams.Length; i++)
-            //{
-            //    string tempString = String.Format("{0} {1}p, {2}g, ({3} - {4} - {5}), {6}gd, ({7} - {8}))",
-            //        tempName[i], tempScores[i][6], tempScores[i][0], tempScores[i][1], tempScores[i][2], tempScores[i][3],
-            //        tempScores[i][4] - tempScores[i][5], tempScores[i][4], tempScores[i][5]);
-            //    tempGame[i] = tempString;
-            //    System.Console.WriteLine(tempString);
-            //}
-
             return tempGame;
         }
         static void Main(string[] args)
         {
             string[] input = new string[] {
-                "World Cup 2010: Group B",
-                "Argentina#1@0#Nigeria",
-                "Korea Republic#2@0#Greece",
-                "Greece#2@1#Nigeria",
-                "Argentina#4@1#Korea Republic",
-                "Nigeria#2@2#Korea Republic",
-                "Greece#0@2#Argentina"
+                "Pewee League",
+                "Two#0@1#Three",
+                "Two#11@11#One",
+                "One#31@31#Two",
+                "Two#0@0#One"
             };
             Program360.Soccer.getRankings(input);
         }
